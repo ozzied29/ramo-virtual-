@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramo de Rosas y Maquillaje</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at center, #ffe4e6 0%, #fbcfe8 40%, #f472b6 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    /* Contenedor principal de la animación */
+    .escenario {
+      position: relative;
+      width: 380px;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Capa de destellos traseros */
+    .aura-brillo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 120%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(244, 114, 182, 0.2) 60%, transparent 80%);
+      border-radius: 50%;
+      filter: blur(20px);
+      z-index: 0;
+      animation: pulsoAura 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulsoAura {
+      0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.5; }
+      100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    }
+
+    /* Marco y contenedor del ramo con animación de entrada y flotación */
+    .tarjeta-ramo {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      border-radius: 28px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 25px 50px -12px rgba(219, 39, 119, 0.35);
+      
+      /* Animación de Entrada y Flotación */
+      animation: entradaRevelar 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                 levitacionMagica 5s ease-in-out 1.4s infinite alternate;
+      transform-origin: center bottom;
+    }
+
+    @keyframes entradaRevelar {
+      0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.7) rotate(-5deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes levitacionMagica {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(1deg) scale(1.02); }
+      100% { transform: translateY(0px) rotate(-1deg); }
+    }
+
+    /* La imagen real del ramo */
+    .imagen-ramo {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.5s ease;
+    }
+
+    /* Efecto de latido/pulso al interactuar */
+    .latido {
+      animation: efectoLatido 0.8s ease-in-out !important;
+    }
+
+    @keyframes efectoLatido {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.08) rotate(1deg); }
+      60% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    /* Mariposa dorada volando libremente */
+    .mariposa-voladora {
+      position: absolute;
+      top: 5%;
+      right: 10%;
+      width: 50px;
+      height: 50px;
+      z-index: 10;
+      pointer-events: none;
+      animation: vueloMariposa 7s ease-in-out infinite;
+    }
+
+    @keyframes vueloMariposa {
+      0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      25% { transform: translate(-30px, -25px) rotate(-15deg) scale(1.1); }
+      50% { transform: translate(15px, -45px) rotate(10deg) scale(0.95); }
+      75% { transform: translate(35px, -15px) rotate(-8deg) scale(1.05); }
+    }
+
+    /* Partículas de destellos brillantes */
+    .brillo {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 2px #fff, 0 0 20px 4px #ec4899;
+      pointer-events: none;
+      z-index: 5;
+      animation: animarBrillo 2s ease-out forwards;
+    }
+
+    @keyframes animarBrillo {
+      0% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.4) rotate(180deg); }
+      100% { opacity: 0; transform: scale(0) translateY(-40px) rotate(360deg); }
+    }
+
+    /* Panel de Botones */
+    .panel-botones {
+      margin-top: 25px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-magico {
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(219, 39, 119, 0.35);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-magico:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 25px rgba(219, 39, 119, 0.5);
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+    }
+
+    .btn-magico:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Modal / Carta de dedicatoria */
+    .modal-nota {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .carta {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 24px;
+      width: 85%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      animation: aparecerCarta 0.4s ease-out;
+      border: 2px solid #fbcfe8;
+    }
+
+    @keyframes aparecerCarta {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .carta h2 {
+      color: #db2777;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .carta p {
+      color: #4b5563;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      font-size: 1.05rem;
+      white-space: pre-line; /* Mantiene saltos de línea */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="escenario">
+    <!-- Resplandor de fondo -->
+    <div class="aura-brillo"></div>
+
+    <!-- Mariposa Animada -->
+    <svg class="mariposa-voladora" viewBox="0 0 60 60">
+      <path d="M30,30 Q10,5 2,25 Q0,40 30,35 Q60,40 58,25 Q50,5 30,30 Z" fill="#fbbf24" opacity="0.85"/>
+      <path d="M30,30 Q15,55 10,42 Q8,30 30,35 Q52,30 50,42 Q45,55 30,30 Z" fill="#f59e0b" opacity="0.95"/>
+      <circle cx="30" cy="32" r="3" fill="#78350f"/>
+    </svg>
+
+    <!-- Tarjeta con la imagen animada -->
+    <div class="tarjeta-ramo" id="tarjetaRamo">
+      <!-- La imagen enviada -->
+      <img src="image_294496.jpg" alt="Ramo de Rosas y Maquillaje" class="imagen-ramo">
+    </div>
+
+    <!-- Panel de Botones -->
+    <div class="panel-botones">
+      <button class="btn-magico" onclick="explotarBrillos()">✨ Lanzar Brillos</button>
+      <button class="btn-magico" onclick="hacerLatar()">💖 Pulsar Ramo</button>
+      <button class="btn-magico" onclick="abrirNota()">✉️ Ver Dedicatoria</button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       VENTANA DE LA DEDICATORIA (AQUÍ CAMBIAS TU TEXTO)
+       ======================================================== -->
+  <div class="modal-nota" id="modalNota">
+    <div class="carta">
+      
+      <!-- TÍTULO DE LA CARTA -->
+      <h2>✨ Para Alguien Especial ✨</h2>
+      
+      <!-- AQUÍ ESCRIBES TU DEDICATORIA PERSONALIZADA -->
+      <p> Feliz Dia amika, un ramo virtual para demostrar mi cariño que te tengo... atentamente tu amigo anonimo Alezx_Lpz :)</p>
+      
+      <!-- BOTÓN PARA CERRAR -->
+      <button class="btn-magico" onclick="cerrarNota()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    // Función para hacer estallar partículas de brillo alrededor del ramo
+    function explotarBrillos() {
+      const tarjeta = document.getElementById('tarjetaRamo');
+      
+      for (let i = 0; i < 20; i++) {
+        const brillo = document.createElement('div');
+        brillo.className = 'brillo';
+
+        const posX = Math.random() * 80 + 10;
+        const posY = Math.random() * 80 + 10;
+
+        brillo.style.left = posX + '%';
+        brillo.style.top = posY + '%';
+        brillo.style.animationDelay = (Math.random() * 0.5) + 's';
+
+        tarjeta.appendChild(brillo);
+
+        setTimeout(() => {
+          brillo.remove();
+        }, 2500);
+      }
+    }
+
+    // Función para activar el latido en el ramo
+    function hacerLatar() {
+      const tarjeta = document.getElementById('tarjetaRamo');
+      tarjeta.classList.add('latido');
+      explotarBrillos();
+
+      setTimeout(() => {
+        tarjeta.classList.remove('latido');
+      }, 800);
+    }
+
+    // Funciones para abrir y cerrar la carta de dedicatoria
+    function abrirNota() {
+      document.getElementById('modalNota').style.display = 'flex';
+      explotarBrillos();
+    }
+
+    function cerrarNota() {
+      document.getElementById('modalNota').style.display = 'none';
+    }
+
+    // Lanzar un destello automático de bienvenida al cargar
+    setTimeout(explotarBrillos, 1500);
+  </script>
+
+</body>
+</html>
